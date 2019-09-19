@@ -64,7 +64,7 @@ public:
    * @param antiwindup Is anti windup enabled
    */
     Pid(double p = 0.0, double i = 0.0, double d = 0.0, double i_max = 0.0, double i_min = -0.0, bool antiwindup = false);
-    Pid(Gains &gains);
+    Pid(const Gains &gains);
 
     Gains get_gains();
     void set_gains(const Gains &gains);

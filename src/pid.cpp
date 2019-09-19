@@ -9,7 +9,7 @@ Pid::Pid(double p, double i, double d, double i_max, double i_min, bool antiwind
 {
     gains_buffer_ = std::make_shared<Gains>(p, i, d, i_max, i_min, antiwindup);
 }
-Pid::Pid(Gains &gains){
+Pid::Pid(const Gains &gains){
     gains_buffer_ = std::make_shared<Gains>(gains);
 }
 
