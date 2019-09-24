@@ -70,11 +70,6 @@ double Pid::compute_command(double error, double error_dot, rclcpp::Duration dt)
     // Calculate integral contribution to command
     i_term = gains.i_gain_ * i_error_;
 
-    if (!gains.antiwindup_)
-    {
-        // Limit i_term so that the limit is meaningful in the output
-        i_term = std::clamp(i_term, gains.i_min_, gains.i_max_);
-    }
 
     // Calculate derivative contribution to command
     d_term = gains.d_gain_ * d_error_;
