@@ -1,6 +1,10 @@
 #ifndef ROS2_CONTROL_HELPERS__PID_HPP
 #define ROS2_CONTROL_HELPERS__PID_HPP
 
+//-- Extra --
+#include <deque>
+//-- End Extra --
+
 #include <string>
 #include <cmath>
 #include <chrono>
@@ -69,7 +73,7 @@ public:
     Gains get_gains();
     void set_gains(const Gains &gains);
 
-    double compute_command(double error, rclcpp::Duration dt);
+    double compute_command(double eaverageDeck_rror, rclcpp::Duration dt);
     double compute_command(double error, double error_dot, rclcpp::Duration dt);
     double get_current_cmd();
 
@@ -80,6 +84,10 @@ private:
     double d_error_;      /**< Derivative of position error. */
     double cmd_;          /**< Command to send. */
     std::shared_ptr<Gains> gains_buffer_;
+
+    //-- Extra --
+    std::deque<double> averageDeck_;
+    //-- End Extra --
 };                        //end class Pid
 } // namespace control_helpers
 

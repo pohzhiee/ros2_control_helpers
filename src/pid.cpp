@@ -39,6 +39,18 @@ double Pid::compute_command(double error, rclcpp::Duration dt)
         p_error_last_ = error;
     }
 
+    //-- Extra --
+    averageDeck_.push_back(error_dot);
+    if(averageDeck_.size() > 6){
+        averageDeck_.pop_front();
+    }
+    double sum = 0;
+    for(auto &val : averageDeck_){
+        sum+=val;
+    }
+    error_dot = sum/6;
+    //-- Extra end --
+
     return compute_command(error, error_dot, dt);
 }
 
